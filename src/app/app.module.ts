@@ -8,9 +8,11 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ExampleComponent } from './components/example/example.component';
 import { HomeComponent } from './components/home/home.component';
-import { ItemService } from './services/item.service';
+import { UserService } from './services/user.service';
+import { AlertService } from './services/alert.service';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
+import { AlertComponent } from './components/alert/alert.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,8 @@ import { LoginComponent } from './components/login/login.component';
     ExampleComponent,
     HomeComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +29,10 @@ import { LoginComponent } from './components/login/login.component';
     HttpClientModule,
     FormsModule
   ],
-  providers: [ItemService],
+  providers: [
+    UserService,
+    AlertService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

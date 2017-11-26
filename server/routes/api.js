@@ -36,13 +36,13 @@ router.get('/items', (req, res) => {
 
 
 //post item in database
-router.post('/item', (req, res) => {
+router.post('/user', (req, res) => {
   const connection = getConnection();
   connection.connect();
-  const newItem = { name: req.body.name };
-  console.log("name in server: ", req.body)
-  connection.query('INSERT INTO items SET ?', newItem, function(err, result) {
-    res.send(newItem)
+  const newUser = { firstName: req.body.firstName, lastName: req.body.lastName, userName: req.body.userName, email: req.body.email, password: req.body.password };
+  console.log("name in server: ", req.body.firstName)
+  connection.query('INSERT INTO users SET ?', newUser, function(err, result) {
+    res.send(newUser)
     res.status(200).end();
   });
   connection.end();

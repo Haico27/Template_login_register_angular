@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../../models/user'
+import { Router } from '@angular/router';
+import { UserService } from '../../services/user.service';
+import { AlertService } from '../../services/alert.service';
 
 @Component({
   selector: 'app-register',
@@ -7,15 +9,29 @@ import { User } from '../../models/user'
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+model: any = { };
 
 
-
-  constructor() { }
+  constructor(
+    private router: Router,
+    private userService: UserService,
+    private alertService: AlertService
+  ) { }
 
   ngOnInit() {
   }
 
-  model = new User('', '', '', '', '')
+register() {
+  this.userService.create(this.model)
+                  .subscribe(
+                    data => {
+                      this.alertService.success('Registration successfull', true)
+                      this.router.navigate(['/login'])
+                    },
+                    error => {
+                      this.alertService.error(error)
+                    })
+}
 
 
 
