@@ -8,7 +8,7 @@ function getConnection() {
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'observable_httprequest'
+    database: 'register_login'
   });
   return connection;
 }
