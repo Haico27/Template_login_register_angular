@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const jwt = require('jsonwebtoken');
 
 // Get database connection
 const mysql = require('mysql');
@@ -45,6 +46,37 @@ router.post('/user', (req, res) => {
     res.send(newUser)
     res.status(200).end();
   });
+  connection.end();
+})
+
+//authenticate user
+router.post('/authenticate', (req, res) => {
+  const connection = getConnection();
+  connection.connect();
+  let params = req.body
+  let credentials = [ req.body.email, req.body.password]
+
+  //find if any user matches login credentials
+  connection.query('SELECT * FROM users WHERE email = ? AND password = ?', credentials, function(err, result){
+    if (result.length) {
+      let resultQuery = result[0];
+
+      let string = JSON.stringify(resultQuery)
+      let user = JSON.parse(string)
+
+      let token = jwt.sign(user.userName, 'superSecret')
+
+      res.json({
+        id: user.id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        userName: user.userName,
+        email: user.email,
+        token: token
+      })
+      res.status(200).end();
+    }
+  })
   connection.end();
 })
 

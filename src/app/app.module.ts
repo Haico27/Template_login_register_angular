@@ -10,9 +10,11 @@ import { ExampleComponent } from './components/example/example.component';
 import { HomeComponent } from './components/home/home.component';
 import { UserService } from './services/user.service';
 import { AlertService } from './services/alert.service';
+import { AuthenticationService } from './services/authentication.service';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { AlertComponent } from './components/alert/alert.component';
+
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import { AlertComponent } from './components/alert/alert.component';
   ],
   providers: [
     UserService,
-    AlertService
+    AlertService,
+    AuthenticationService
   ],
   bootstrap: [AppComponent]
 })

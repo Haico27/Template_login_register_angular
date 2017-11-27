@@ -4,6 +4,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const app = express();
 const server = http.createServer(app);
+const jwt = require('jsonwebtoken')
 
 // Get our API routes
 const api = require('./server/routes/api');

@@ -21,17 +21,17 @@ model: any = { };
   ngOnInit() {
   }
 
-register() {
-  this.userService.create(this.model)
-                  .subscribe(
-                    data => {
-                      this.alertService.success('Registration successfull', true)
-                      this.router.navigate(['/login'])
-                    },
-                    error => {
-                      this.alertService.error(error)
-                    })
-}
+  register() {
+    this.userService.create(this.model)
+                    .subscribe(
+                      data => {
+                        this.alertService.success('Registration successfull', true)
+                        this.router.navigate(['/login'])
+                      },
+                      error => {
+                        this.alertService.error(error)
+                      })
+  }
 
 
 
