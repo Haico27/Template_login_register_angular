@@ -22,17 +22,23 @@ router.get('/', (req, res) => {
 
 //get items from database
 router.get('/users', (req, res) => {
-  const connection = getConnection();
-  connection.connect();
-  connection.query('SELECT id, firstName, lastName, userName, email FROM users order by id asc', function(err, rows, fields) {
-    if (!err) {
-      console.log(rows);
-      res.send(JSON.stringify(rows));
-    } else {
-      console.log('Error while performing Query');
-    }
-  });
-  connection.end()
+
+  if (req.headers.authorization !== 'Bearer ' + undefined) {
+    const connection = getConnection();
+    connection.connect();
+    connection.query('SELECT id, firstName, lastName, userName, email FROM users order by id asc', function(err, rows, fields) {
+      if (!err) {
+        console.log(rows);
+        res.send(JSON.stringify(rows));
+      } else {
+        console.log('Error while performing Query');
+      }
+    });
+    connection.end()
+  } else {
+    res.status(401)
+  }
+
 })
 
 

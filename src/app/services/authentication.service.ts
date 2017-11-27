@@ -6,6 +6,7 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class AuthenticationService {
+
   constructor(private http: HttpClient) { }
 
   private headers = new HttpHeaders({ 'Content-Type': 'application/json' });
@@ -19,11 +20,17 @@ export class AuthenticationService {
                         localStorage.setItem('currentUser', JSON.stringify(user))
                       }
                       return user
-
                     })
   }
 
   logout() {
     localStorage.removeItem('currentUser')
+  }
+
+  getToken() {
+     let currentUser = JSON.parse(localStorage.getItem('currentUser'))
+     if (currentUser != null) {
+       return currentUser.token
+     }
   }
 }

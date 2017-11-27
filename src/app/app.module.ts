@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule }   from '@angular/forms';
 
 import { AppComponent } from './app.component';
@@ -14,6 +14,8 @@ import { AuthenticationService } from './services/authentication.service';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { AlertComponent } from './components/alert/alert.component';
+
+import { TokenInterceptor } from './interceptors/token.interceptor';
 
 
 @NgModule({
@@ -34,7 +36,12 @@ import { AlertComponent } from './components/alert/alert.component';
   providers: [
     UserService,
     AlertService,
-    AuthenticationService
+    AuthenticationService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

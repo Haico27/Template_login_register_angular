@@ -11,6 +11,7 @@ import { AuthenticationService } from '../../services/authentication.service';
 })
 export class LoginComponent implements OnInit {
   model: any = { };
+  loggedIn: boolean = false;
 
 
   constructor(
@@ -30,10 +31,12 @@ export class LoginComponent implements OnInit {
                                 data => {
                                   console.log("currentUser in logincomponent: ", JSON.parse(localStorage.getItem('currentUser')))
                                   this.alertService.success('Login successfull', true)
+                                  this.loggedIn = true;
                                   this.router.navigate(['/'])
                                 },
                                 error => {
                                   this.alertService.error(error);
+                                  this.loggedIn = false;
                                 }
                               )
   }
