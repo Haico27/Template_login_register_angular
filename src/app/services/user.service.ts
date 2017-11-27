@@ -11,4 +11,8 @@ export class UserService {
   create(user: User) {
     return this.http.post('/api/user', user).map((response: Response) => response)
   }
+
+  getAllUsers() {
+    return this.http.get('/api/users').map((response: HttpResponse<any>) => <any>response);
+  }
 }

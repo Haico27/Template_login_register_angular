@@ -21,10 +21,10 @@ router.get('/', (req, res) => {
 
 
 //get items from database
-router.get('/items', (req, res) => {
+router.get('/users', (req, res) => {
   const connection = getConnection();
   connection.connect();
-  connection.query('SELECT * from items order by id asc', function(err, rows, fields) {
+  connection.query('SELECT id, firstName, lastName, userName, email FROM users order by id asc', function(err, rows, fields) {
     if (!err) {
       console.log(rows);
       res.send(JSON.stringify(rows));
